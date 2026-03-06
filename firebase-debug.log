@@ -1,0 +1,117 @@
+[debug] [2026-03-06T03:56:00.930Z] ----------------------------------------------------------------------
+[debug] [2026-03-06T03:56:00.933Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\minec\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js init
+[debug] [2026-03-06T03:56:00.933Z] CLI Version:   15.9.0
+[debug] [2026-03-06T03:56:00.933Z] Platform:      win32
+[debug] [2026-03-06T03:56:00.933Z] Node Version:  v24.13.1
+[debug] [2026-03-06T03:56:00.933Z] Time:          Thu Mar 05 2026 19:56:00 GMT-0800 (Pacific Standard Time)
+[debug] [2026-03-06T03:56:00.933Z] ----------------------------------------------------------------------
+[debug] 
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  C:\Users\minec\Documents\GitHub\p-stream
+
+[info] 
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] 
+[info] i  If you want to create a project in a Google Cloud organization or folder, please use "firebase projects:create" instead, and return to this command when you've created the project. 
+[debug] [2026-03-06T03:56:41.053Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2026-03-06T03:56:41.053Z] > authorizing via signed-in user (jamjammc226@gmail.com)
+[debug] [2026-03-06T03:56:52.651Z] Checked if tokens are valid: true, expires at: 1772772936404
+[debug] [2026-03-06T03:56:52.651Z] Checked if tokens are valid: true, expires at: 1772772936404
+[debug] [2026-03-06T03:56:52.653Z] >>> [apiv2][query] POST https://firebase.googleapis.com/v1/projects:checkProjectId [none]
+[debug] [2026-03-06T03:56:52.653Z] >>> [apiv2][body] POST https://firebase.googleapis.com/v1/projects:checkProjectId {"proposedId":"gamermovies"}
+[debug] [2026-03-06T03:56:53.071Z] <<< [apiv2][status] POST https://firebase.googleapis.com/v1/projects:checkProjectId 200
+[debug] [2026-03-06T03:56:53.071Z] <<< [apiv2][body] POST https://firebase.googleapis.com/v1/projects:checkProjectId {"projectIdStatus":"PROJECT_ID_AVAILABLE","suggestedProjectId":"gamermovies"}
+[debug] [2026-03-06T03:56:57.673Z] Checked if tokens are valid: true, expires at: 1772772936404
+[debug] [2026-03-06T03:56:57.674Z] Checked if tokens are valid: true, expires at: 1772772936404
+[debug] [2026-03-06T03:56:57.674Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects [none]
+[debug] [2026-03-06T03:56:57.674Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects {"projectId":"gamermovies","name":"gamermovies"}
+[debug] [2026-03-06T03:56:58.347Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects 200
+[debug] [2026-03-06T03:56:58.347Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects {"name":"operations/create_project.global.5665841612142720035"}
+[debug] [2026-03-06T03:56:58.348Z] Checked if tokens are valid: true, expires at: 1772772936404
+[debug] [2026-03-06T03:56:58.348Z] Checked if tokens are valid: true, expires at: 1772772936404
+[debug] [2026-03-06T03:56:58.348Z] >>> [apiv2][query] GET https://cloudresourcemanager.googleapis.com/v1/operations/create_project.global.5665841612142720035 [none]
+[debug] [2026-03-06T03:56:58.573Z] <<< [apiv2][status] GET https://cloudresourcemanager.googleapis.com/v1/operations/create_project.global.5665841612142720035 200
+[debug] [2026-03-06T03:56:58.573Z] <<< [apiv2][body] GET https://cloudresourcemanager.googleapis.com/v1/operations/create_project.global.5665841612142720035 {"name":"operations/create_project.global.5665841612142720035","metadata":{"@type":"type.googleapis.com/google.cloudresourcemanager.v1.ProjectCreationStatus","ready":true},"done":true,"error":{"code":8,"message":"The project cannot be created because you have exceeded your allotted project quota.","details":[{"@type":"type.googleapis.com/google.rpc.QuotaFailure","violations":[{"description":"The project cannot be created because you have exceeded your allotted project quota."}]}]}}
+[debug] [2026-03-06T03:56:58.857Z] FirebaseError: The project cannot be created because you have exceeded your allotted project quota.
+    at OperationPoller.poll (C:\Users\minec\AppData\Roaming\npm\node_modules\firebase-tools\lib\operation-poller.js:25:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async createCloudProject (C:\Users\minec\AppData\Roaming\npm\node_modules\firebase-tools\lib\management\projects.js:237:29)
+    at async createFirebaseProjectAndLog (C:\Users\minec\AppData\Roaming\npm\node_modules\firebase-tools\lib\management\projects.js:102:9)
+    at async Object.doSetup (C:\Users\minec\AppData\Roaming\npm\node_modules\firebase-tools\lib\init\features\project.js:64:24)
+    at async init (C:\Users\minec\AppData\Roaming\npm\node_modules\firebase-tools\lib\init\index.js:92:13)
+    at async Command.initAction [as actionFn] (C:\Users\minec\AppData\Roaming\npm\node_modules\firebase-tools\lib\commands\init.js:231:5)
+[error] 
+[error] Error: Failed to create project. See firebase-debug.log for more info.
+[debug] [2026-03-06T03:57:34.597Z] ----------------------------------------------------------------------
+[debug] [2026-03-06T03:57:34.599Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\minec\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js init
+[debug] [2026-03-06T03:57:34.600Z] CLI Version:   15.9.0
+[debug] [2026-03-06T03:57:34.600Z] Platform:      win32
+[debug] [2026-03-06T03:57:34.600Z] Node Version:  v24.13.1
+[debug] [2026-03-06T03:57:34.600Z] Time:          Thu Mar 05 2026 19:57:34 GMT-0800 (Pacific Standard Time)
+[debug] [2026-03-06T03:57:34.600Z] ----------------------------------------------------------------------
+[debug] 
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  C:\Users\minec\Documents\GitHub\p-stream
+
+[info] 
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] 
+[debug] [2026-03-06T03:57:46.213Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2026-03-06T03:57:46.213Z] > authorizing via signed-in user (jamjammc226@gmail.com)
+[debug] [2026-03-06T03:57:46.215Z] Checked if tokens are valid: true, expires at: 1772772936404
+[debug] [2026-03-06T03:57:46.215Z] Checked if tokens are valid: true, expires at: 1772772936404
+[debug] [2026-03-06T03:57:46.216Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects pageSize=100
+[debug] [2026-03-06T03:57:46.772Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects 200
+[debug] [2026-03-06T03:57:46.772Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects [omitted]
+[info] 
+=== Hosting Setup
+[debug] [2026-03-06T03:57:50.655Z] Checked if tokens are valid: true, expires at: 1772772936404
+[debug] [2026-03-06T03:57:50.655Z] Checked if tokens are valid: true, expires at: 1772772936404
+[debug] [2026-03-06T03:57:50.655Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/poised-beach-312401 [none]
+[debug] [2026-03-06T03:57:50.812Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/poised-beach-312401 200
+[debug] [2026-03-06T03:57:50.812Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/poised-beach-312401 {"projectId":"poised-beach-312401","projectNumber":"739414553956","displayName":"My First Project","name":"projects/poised-beach-312401","resources":{"hostingSite":"poised-beach-312401"},"state":"ACTIVE","etag":"1_9cf45863-2f4f-45d6-8cf4-1ec74c423fd3"}
+[info] 
+[info] Your public directory is the folder (relative to your project directory) that
+[info] will contain Hosting assets to be uploaded with firebase deploy. If you
+[info] have a build process for your assets, use your build's output directory.
+[info] 
+[info] 
+[info] i  Detected a .git folder at C:\Users\minec\Documents\GitHub\p-stream 
+[info] i  Authorizing with GitHub to upload your service account to a GitHub repository's secrets store. 
+[info] 
+[info] Visit this URL on this device to log in:
+[info] https://github.com/login/oauth/authorize?client_id=89cf50f02ac6aaed3484&state=507409176&redirect_uri=http%3A%2F%2Flocalhost%3A9005&scope=read%3Auser%20repo%20public_repo
+[info] 
+[info] Waiting for authentication...
+[debug] [2026-03-06T03:58:11.369Z] >>> [apiv2][query] POST https://github.com/login/oauth/access_token [none]
+[debug] [2026-03-06T03:58:11.370Z] >>> [apiv2][body] POST https://github.com/login/oauth/access_token [stream]
+[debug] [2026-03-06T03:58:12.472Z] <<< [apiv2][status] POST https://github.com/login/oauth/access_token 200
+[debug] [2026-03-06T03:58:12.472Z] <<< [apiv2][body] POST https://github.com/login/oauth/access_token {"access_token":"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","token_type":"bearer","scope":"read:user,repo"}
+[debug] [2026-03-06T03:58:12.477Z] >>> [apiv2][query] GET https://api.github.com/user [none]
+[debug] [2026-03-06T03:58:12.882Z] <<< [apiv2][status] GET https://api.github.com/user 200
+[debug] [2026-03-06T03:58:12.882Z] <<< [apiv2][body] GET https://api.github.com/user {"login":"GamerNation12","id":179183461,"node_id":"U_kgDOCq4fZQ","avatar_url":"https://avatars.githubusercontent.com/u/179183461?v=4","gravatar_id":"","url":"https://api.github.com/users/GamerNation12","html_url":"https://github.com/GamerNation12","followers_url":"https://api.github.com/users/GamerNation12/followers","following_url":"https://api.github.com/users/GamerNation12/following{/other_user}","gists_url":"https://api.github.com/users/GamerNation12/gists{/gist_id}","starred_url":"https://api.github.com/users/GamerNation12/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/GamerNation12/subscriptions","organizations_url":"https://api.github.com/users/GamerNation12/orgs","repos_url":"https://api.github.com/users/GamerNation12/repos","events_url":"https://api.github.com/users/GamerNation12/events{/privacy}","received_events_url":"https://api.github.com/users/GamerNation12/received_events","type":"User","user_view_type":"private","site_admin":false,"name":"Minecraft Gamer Nation","company":null,"blog":"","location":"United States","email":"minecraft-gamer-nation@post.com","hireable":null,"bio":null,"twitter_username":null,"notification_email":"minecraft-gamer-nation@post.com","public_repos":28,"public_gists":1,"followers":2,"following":2,"created_at":"2024-08-23T00:20:21Z","updated_at":"2026-02-18T00:55:21Z","private_gists":2,"total_private_repos":13,"owned_private_repos":13,"disk_usage":114313,"collaborators":1,"two_factor_authentication":false,"plan":{"name":"free","space":976562499,"collaborators":0,"private_repos":10000}}
+[info] 
+[info] +  Success! Logged into GitHub as GamerNation12 
+[info] 
