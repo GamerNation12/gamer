@@ -13,7 +13,7 @@ window.__CONFIG__ = {
   VITE_NORMAL_ROUTER: true,
 
   // The backend URL(s) to communicate with - can be a single URL or comma-separated list (e.g., "https://server1.com,https://server2.com")
-  VITE_BACKEND_URL: null,
+  VITE_BACKEND_URL: "https://chimerical-froyo-d531aa.netlify.app",
 
   // A comma separated list of disallowed IDs in the case of a DMCA claim - in the format "series-<id>" and "movie-<id>"
   VITE_DISALLOWED_IDS: "",
