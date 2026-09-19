@@ -17,6 +17,7 @@ import { convertRunoutputToSource } from "@/components/player/utils/convertRunou
 import { useOverlayRouter } from "@/hooks/useOverlayRouter";
 import { metaToScrapeMedia } from "@/stores/player/slices/source";
 import { usePlayerStore } from "@/stores/player/store";
+import { rememberHdSource } from "@/stores/player/utils/qualities";
 import { usePreferencesStore } from "@/stores/preferences";
 import { useProgressStore } from "@/stores/progress";
 
@@ -89,6 +90,7 @@ export function useEmbedScraping(
       convertProviderCaption(result.stream[0].captions),
       getSavedProgress(progressItems, meta),
     );
+    rememberHdSource(sourceId, result.stream[0]);
     // Save the last successful source when manually selected
     if (enableLastSuccessfulSource) {
       setLastSuccessfulSource(sourceId);
@@ -162,6 +164,7 @@ export function useSourceScraping(sourceId: string | null, routerId: string) {
         convertProviderCaption(result.stream[0].captions),
         getSavedProgress(progressItems, meta),
       );
+      rememberHdSource(sourceId, result.stream[0]);
       setSourceId(sourceId);
       // Save the last successful source when manually selected
       if (enableLastSuccessfulSource) {
@@ -211,6 +214,7 @@ export function useSourceScraping(sourceId: string | null, routerId: string) {
         convertProviderCaption(embedResult.stream[0].captions),
         getSavedProgress(progressItems, meta),
       );
+      rememberHdSource(sourceId, embedResult.stream[0]);
       // Save the last successful source when manually selected
       if (enableLastSuccessfulSource) {
         setLastSuccessfulSource(sourceId);

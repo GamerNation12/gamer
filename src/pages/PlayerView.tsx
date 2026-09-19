@@ -26,6 +26,7 @@ import { SourceSelectPart } from "@/pages/parts/player/SourceSelectPart";
 import { useLastNonPlayerLink } from "@/stores/history";
 import { PlayerMeta, playerStatus } from "@/stores/player/slices/source";
 import { usePlayerStore } from "@/stores/player/store";
+import { rememberHdSource } from "@/stores/player/utils/qualities";
 import { usePreferencesStore } from "@/stores/preferences";
 import { getProgressPercentage, useProgressStore } from "@/stores/progress";
 import { needsOnboarding } from "@/utils/onboarding";
@@ -223,6 +224,8 @@ export function RealPlayerView() {
         out.sourceId,
         shouldStartFromBeginning ? 0 : startAt,
       );
+      // Remember 1080p-capable sources so they are tried first next time
+      rememberHdSource(out.sourceId, out.stream);
       setShouldStartFromBeginning(false);
     },
     [

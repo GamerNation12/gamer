@@ -153,13 +153,30 @@ export function SourceSelectPart(props: { media: ScrapeMedia }) {
   const enableLastSuccessfulSource = usePreferencesStore(
     (s) => s.enableLastSuccessfulSource,
   );
+  const hdSourceIds = usePreferencesStore((s) => s.hdSourceIds);
+  const enableHdSourcePriority = usePreferencesStore(
+    (s) => s.enableHdSourcePriority,
+  );
+  const isKnownHd = React.useCallback(
+    (id: string) => enableHdSourcePriority && hdSourceIds.includes(id),
+    [enableHdSourcePriority, hdSourceIds],
+  );
 
   const sources = useMemo(() => {
     const metaType = props.media.type;
     if (!metaType) return [];
-    const allSources = getCachedMetadata()
+    let allSources = getCachedMetadata()
       .filter((v) => v.type === "source")
       .filter((v) => v.mediaTypes?.includes(metaType));
+
+    // Sources proven to deliver 1080p+ go first so people can see
+    // and pick them. Explicit custom order / last-successful
+    // handling below keeps precedence over this.
+    if (enableHdSourcePriority && hdSourceIds.length > 0) {
+      const hdFirst = allSources.filter((s) => hdSourceIds.includes(s.id));
+      const rest = allSources.filter((s) => !hdSourceIds.includes(s.id));
+      allSources = [...hdFirst, ...rest];
+    }
 
     if (!enableSourceOrder || preferredSourceOrder.length === 0) {
       // Even without custom source order, prioritize last successful source if enabled
@@ -209,6 +226,8 @@ export function SourceSelectPart(props: { media: ScrapeMedia }) {
     enableSourceOrder,
     lastSuccessfulSource,
     enableLastSuccessfulSource,
+    hdSourceIds,
+    enableHdSourcePriority,
   ]);
 
   if (selectedSourceId) {
@@ -237,6 +256,13 @@ export function SourceSelectPart(props: { media: ScrapeMedia }) {
               <SelectableLink
                 key={v.id}
                 onClick={() => setSelectedSourceId(v.id)}
+                rightSide={
+                  isKnownHd(v.id) ? (
+                    <span className="rounded-md bg-video-scraping-success/15 px-2 py-0.5 text-[11px] font-bold uppercase tracking-wider text-video-scraping-success">
+                      1080p
+                    </span>
+                  ) : undefined
+                }
               >
                 {v.name}
               </SelectableLink>

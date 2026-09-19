@@ -1,5 +1,6 @@
 import { Qualities, Stream } from "@p-stream/providers";
 
+import { usePreferencesStore } from "@/stores/preferences";
 import { QualityStore } from "@/stores/quality";
 
 export type SourceQuality = Qualities;
@@ -131,4 +132,23 @@ export const allQualities = Object.keys(qualityNameMap) as SourceQuality[];
 
 export function qualityToString(quality: SourceQuality): string {
   return qualityNameMap[quality];
+}
+
+// A stream counts as HD if it offers 1080p/4k renditions.
+// HLS playlists are adaptive (the player picks the highest
+// bandwidth variant), so they count as HD-capable too.
+export function streamOffersHd(stream: Stream): boolean {
+  if (stream.type === "hls") return true;
+  if (stream.type === "file") {
+    const qualities = stream.qualities as Record<string, unknown>;
+    return qualities["1080"] !== undefined || qualities["4k"] !== undefined;
+  }
+  return false;
+}
+
+// Remember sources that delivered an HD stream so future
+// scrapes can try them first. No-op for non-HD streams.
+export function rememberHdSource(sourceId: string, stream: Stream) {
+  if (!streamOffersHd(stream)) return;
+  usePreferencesStore.getState().addHdSourceId(sourceId);
 }

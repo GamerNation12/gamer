@@ -23,6 +23,8 @@ export interface PreferencesStore {
   enableSourceOrder: boolean;
   lastSuccessfulSource: string | null;
   enableLastSuccessfulSource: boolean;
+  hdSourceIds: string[];
+  enableHdSourcePriority: boolean;
   embedOrder: string[];
   enableEmbedOrder: boolean;
   proxyTmdb: boolean;
@@ -57,6 +59,8 @@ export interface PreferencesStore {
   setEnableSourceOrder(v: boolean): void;
   setLastSuccessfulSource(v: string | null): void;
   setEnableLastSuccessfulSource(v: boolean): void;
+  addHdSourceId(v: string): void;
+  setEnableHdSourcePriority(v: boolean): void;
   setEmbedOrder(v: string[]): void;
   setEnableEmbedOrder(v: boolean): void;
   setProxyTmdb(v: boolean): void;
@@ -95,6 +99,8 @@ export const usePreferencesStore = create(
       enableSourceOrder: false,
       lastSuccessfulSource: null,
       enableLastSuccessfulSource: false,
+      hdSourceIds: [],
+      enableHdSourcePriority: true,
       embedOrder: [],
       enableEmbedOrder: false,
       proxyTmdb: false,
@@ -186,6 +192,20 @@ export const usePreferencesStore = create(
       setEnableLastSuccessfulSource(v) {
         set((s) => {
           s.enableLastSuccessfulSource = v;
+        });
+      },
+      addHdSourceId(v) {
+        set((s) => {
+          // most recently proven HD source first, no duplicates, bounded size
+          s.hdSourceIds = [v, ...s.hdSourceIds.filter((id) => id !== v)].slice(
+            0,
+            50,
+          );
+        });
+      },
+      setEnableHdSourcePriority(v) {
+        set((s) => {
+          s.enableHdSourcePriority = v;
         });
       },
       setEmbedOrder(v) {

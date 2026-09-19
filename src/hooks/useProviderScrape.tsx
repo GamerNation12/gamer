@@ -160,6 +160,10 @@ export function useScrape() {
   );
   const preferredEmbedOrder = usePreferencesStore((s) => s.embedOrder);
   const enableEmbedOrder = usePreferencesStore((s) => s.enableEmbedOrder);
+  const hdSourceIds = usePreferencesStore((s) => s.hdSourceIds);
+  const enableHdSourcePriority = usePreferencesStore(
+    (s) => s.enableHdSourcePriority,
+  );
 
   const startScraping = useCallback(
     async (media: ScrapeMedia, startFromSourceId?: string) => {
@@ -191,6 +195,17 @@ export function useScrape() {
       let baseSourceOrder = allSources
         .filter((source) => !failedSources.includes(source.id))
         .map((source) => source.id);
+
+      // Try sources that previously delivered 1080p+ streams first.
+      // Explicit custom ordering and last-successful-source are
+      // applied on top of this below, so they keep precedence.
+      if (enableHdSourcePriority && hdSourceIds.length > 0) {
+        const hdFirst = baseSourceOrder.filter((id) =>
+          hdSourceIds.includes(id),
+        );
+        const rest = baseSourceOrder.filter((id) => !hdSourceIds.includes(id));
+        baseSourceOrder = [...hdFirst, ...rest];
+      }
 
       // Apply custom source ordering if enabled
       if (enableSourceOrder && (preferredSourceOrder || []).length > 0) {
@@ -276,6 +291,8 @@ export function useScrape() {
       enableLastSuccessfulSource,
       preferredEmbedOrder,
       enableEmbedOrder,
+      hdSourceIds,
+      enableHdSourcePriority,
     ],
   );
 
